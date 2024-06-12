@@ -1,4 +1,7 @@
 class GameState:
+    """
+    Represents the state of the game.
+    """
     def __init__(self):
         self.obstacles = []
         self.game_speed_rate = 1

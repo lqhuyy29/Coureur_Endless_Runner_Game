@@ -6,6 +6,9 @@ COUREUR_WIDTH = 156
 COUREUR_HEIGHT = 122
 
 class Player:
+    """
+    Represents the player character in the game.
+    """
     def __init__(self):
         self.images = coureur_images
         self.index = 0
@@ -20,6 +23,9 @@ class Player:
         self.frame_count = 0
 
     def move(self, dx, dy):
+        """
+        Moves the player character by the specified amount while ensuring it stays within the movement limits.
+        """
         self.rect.x += dx
         self.rect.y += dy
         if self.rect.left < self.limit_left:
@@ -32,6 +38,9 @@ class Player:
             self.rect.bottom = self.limit_bottom
 
     def update(self, keys):
+        """
+        Updates the state of the player character based on the pressed keys and manages the animation.
+        """
         dx, dy = 0, 0
         if keys[pygame.K_UP]:
             dy = -self.speed

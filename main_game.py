@@ -1,3 +1,8 @@
+"""
+Module Description:
+This module implements an endless runner game using Pygame. It includes functionalities for player movement, obstacle generation and collision detection, score tracking, and game speed increase over time.
+"""
+
 import pygame
 from game_object.player import Player
 from game_object.obstacle import add_obstacle
@@ -41,7 +46,10 @@ font = pygame.font.SysFont(None, 36)
 score_time = 0
 SCORE_INTERVAL = 100
 
-def check_collision(player, obstacles):
+def check_collision(player):
+    """
+    Checks for collisions between the player character and obstacles on the screen.
+    """
     player_left_collision_point = (player.rect.left, player.rect.bottom)
     player_right_collision_point = (player.rect.right, player.rect.bottom)
 
@@ -61,6 +69,12 @@ def check_collision(player, obstacles):
     return False
 
 def game_loop():
+    """
+    Executes the main game loop.
+
+    This function updates the game state, including player movement, obstacle generation, collision detection, score tracking, and rendering of game objects and UI elements.
+    It returns False if the game is over due to collision and True otherwise.
+    """
     global road_x, background_x, score_time, game_speed_increase_timer, obstacle_timer
 
     player.update(pygame.key.get_pressed())
@@ -72,7 +86,7 @@ def game_loop():
     for obstacle in game_state.obstacles:
         obstacle.update()
 
-    if check_collision(player, game_state.obstacles):
+    if check_collision(player):
         return False
 
     road_x -= road_speed
