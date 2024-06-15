@@ -14,7 +14,7 @@ class Obstacle:
         self.image = image
         self.rect = self.image.get_rect()
         self.lane = lane
-        self.rect.bottom = 360 + (lane * 120) + 120 - 16
+        self.rect.bottom = 360 + (lane * 120) + 120 - 4
         self.rect.left = 1280  # Sử dụng chiều rộng màn hình từ SCREEN_WIDTH
         self.speed = speed * game_state.game_speed_rate
 

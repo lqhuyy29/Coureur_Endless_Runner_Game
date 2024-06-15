@@ -20,6 +20,7 @@ road = pygame.image.load('assets/road.png')
 background = pygame.image.load('assets/background.png')
 screen_img = pygame.image.load('assets/screen.png')
 music = pygame.mixer.Sound('assets/music.mp3')
+crash_sound = pygame.mixer.Sound('assets/crash.mp3')
 music.play(-1)
 
 player = Player()
@@ -57,8 +58,8 @@ def check_collision(player):
         obstacle_collision_area = (
             obstacle.rect.left,
             obstacle.rect.right,
-            obstacle.rect.bottom - 120 + 16,
-            obstacle.rect.bottom + 16
+            obstacle.rect.bottom - 120 + 4,
+            obstacle.rect.bottom + 4
         )
 
         if ((obstacle_collision_area[0] <= player_left_collision_point[0] <= obstacle_collision_area[1] or
@@ -133,6 +134,7 @@ while running:
             if event.key == pygame.K_RETURN:
                 if not game_active:
                     game_state.reset()
+                    player.rect.center = (360, (240 + 720) // 2)
                     game_active = True
                     game_over = False
 
@@ -140,6 +142,7 @@ while running:
         game_active = game_loop()
         if not game_active:
             game_over = True
+            crash_sound.play()
     else:
         if game_over:
             show_game_over_screen(screen, screen_img, font, game_state.score, SCREEN_WIDTH, SCREEN_HEIGHT)
